@@ -1,0 +1,15 @@
+node_modules
+dist
+build
+logs
+*.log
+.vscode
+.idea
+.git
+.gitignore
+.DS_Store
+Thumbs.db
+__tests__
+*.spec.ts
+*.test.ts
+.env
