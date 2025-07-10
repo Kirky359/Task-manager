@@ -7,6 +7,8 @@ services:
       - ${SERVER_PORTS}
     environment:
       - DATABASE_URL=${DATABASE_URL_DOCKER}
+      - JWT_SECRET=${JWT_SECRET}
+      - EXPIRES_IN=${EXPIRES_IN}
     depends_on:
       - db
 
@@ -25,6 +27,7 @@ services:
       - ${DB_PORTS}
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
 
 volumes:
   db_data:

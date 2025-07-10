@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import { userInput } from "../types/userInput";
 import { authUser, loginUser } from "../services/authService";
-import { userSchema } from "../vaildators/userValidator";
+import {
+  userLoginSchema,
+  userRegisterSchema,
+} from "../vaildators/userValidator";
 
 export const signUpUser = async (req: Request, res: Response) => {
   try {
-    const user: userInput = userSchema.parse(req.body);
+    const user: userInput = userRegisterSchema.parse(req.body);
     const rawPassword: string = user.password;
     await authUser(user);
 
@@ -26,7 +29,7 @@ export const signUpUser = async (req: Request, res: Response) => {
 
 export const signInUser = async (req: Request, res: Response) => {
   try {
-    const validateUser = userSchema.parse(req.body);
+    const validateUser = userLoginSchema.parse(req.body);
 
     const user: userInput = validateUser;
     const token = await loginUser(user, user.password);

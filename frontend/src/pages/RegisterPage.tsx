@@ -15,7 +15,7 @@ export function SignUpUser() {
   async function handleSubmit() {
     setStatus("loading");
     try {
-      const res = await fetch("http://localhost:3000/api/auth/sign-up", {
+      const res = await fetch("http://localhost:3001/api/auth/sign-up", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(user),
@@ -25,9 +25,9 @@ export function SignUpUser() {
       setServerMessage(data.message || "Account registered successfully");
       setStatus("success");
     } catch (err) {
-      console.log(err);
       setServerMessage("Failed to send data to register account");
       setStatus("error");
+      console.log(err, status, serverMessage);
     }
   }
 
@@ -71,8 +71,6 @@ export function SignUpUser() {
         />
       </label>
       <button onClick={handleSubmit}>Submit</button>
-      <p>Status: {status}</p>
-      <p>{serverMessage}</p>
     </div>
   );
 }

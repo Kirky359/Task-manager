@@ -12,20 +12,20 @@ export function SignInUser() {
   async function handleSubmit() {
     try {
       setStatus("Loading");
-      const res = await fetch("http://localhost:3000/api/auth/sign-in", {
+      const res = await fetch("http://localhost:3001/api/auth/sign-in", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(user),
       });
 
       const data = await res.json();
-      setStatus("Error");
+      setStatus("Success");
       setServerMessage(data.message || "Login succeded!");
       console.log("Login succeeded");
     } catch (err) {
-      console.log(err);
       setStatus("Error");
       setServerMessage("Failed to login!");
+      console.log(err, status, serverMessage);
     }
   }
   return (
@@ -45,7 +45,6 @@ export function SignInUser() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleSubmit}>Submit</button>
-      <p>Status: {status}</p>
       <p>{serverMessage}</p>
     </div>
   );
